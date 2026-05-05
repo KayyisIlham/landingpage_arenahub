@@ -29,14 +29,26 @@ nav{
   border-bottom:1px solid var(--border);
   padding:0 5%;
   display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
   height:64px;
 }
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--blue);display:flex;align-items:center;gap:8px}
-.logo-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.logo-icon svg{width:18px;height:18px;fill:white}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg, #1A6EF5, #4F8CFF);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo-icon img{width:22px;height:22px;object-fit:contain}
 .nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--blue);
+  transition:width .3s
+}
 .nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
 .nav-cta{background:var(--blue);color:white;border:none;padding:10px 20px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;cursor:pointer;transition:background .2s}
 .nav-cta:hover{background:var(--blue-dark)}
 
@@ -68,7 +80,7 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,62px);font-weight:800;
 h1 em{color:var(--blue);font-style:normal}
 .hero p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:36px;max-width:480px}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
-.btn-primary{background:var(--blue);color:white;padding:14px 28px;border-radius:12px;border:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--blue);color:white;padding:14px 28px;border-radius:12px;border:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(26,110,245,0.25)}
 .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .btn-outline{background:transparent;color:var(--text);padding:14px 28px;border-radius:12px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .btn-outline:hover{border-color:var(--blue);color:var(--blue)}
@@ -133,11 +145,12 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;
   position:relative;overflow:hidden;
 }
 .service-card::after{content:'';position:absolute;inset:0;background:var(--blue);opacity:0;transition:opacity .3s;border-radius:20px;z-index:0}
-.service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(26,110,245,0.12);border-color:var(--blue)}
+.service-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 40px rgba(26,110,245,0.12);border-color:var(--blue)}
 .service-icon{font-size:32px;margin-bottom:16px;display:block;position:relative;z-index:1}
 .service-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;position:relative;z-index:1}
 .service-desc{font-size:13px;color:var(--muted);line-height:1.6;position:relative;z-index:1}
 .service-price{font-size:13px;font-weight:600;color:var(--blue);margin-top:12px;position:relative;z-index:1}
+.service-card, .tech-card, .review-card{backdrop-filter: blur(10px);}
 
 /* HOW IT WORKS */
 .how-bg{background:var(--text);border-radius:32px;margin:0 4%;padding:72px 8%}
@@ -226,7 +239,7 @@ footer{background:var(--text);color:rgba(255,255,255,0.6);padding:60px 8% 32px;m
 <nav>
   <div class="logo">
     <div class="logo-icon">
-      <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+      <img src="logo.png" alt="SuperRepair Logo">
     </div>
     SuperRepair
   </div>
@@ -250,7 +263,7 @@ footer{background:var(--text);color:rgba(255,255,255,0.6);padding:60px 8% 32px;m
         <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.39-1.32 2.76-2.53 3.99zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
         Protoype
       </a>
-      <a href="https://www.figma.com/proto/zXIksggOkVIbzx0iS7pK8v?node-id=0-1&t=caOeSFWNOCm4NgRD-6" class="btn-primary" style="background:rgba(26,110,245,0.12);color:var(--blue)" target="_blank">
+      <a href="https://forms.gle/nvKYybjftLhP5aWQ9" class="btn-primary" style="background:rgba(26,110,245,0.12);color:var(--blue)" target="_blank">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.886a1 1 0 01.002 1.76l-1.99 1.149L13.207 12l2.503-2.503 1.988 1.324zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/></svg>
         Google Form
       </a>
@@ -493,15 +506,15 @@ footer{background:var(--text);color:rgba(255,255,255,0.6);padding:60px 8% 32px;m
         <a href="#" class="app-btn">
           <span>🍎</span>
           <div class="app-btn-text">
-            <small>Download di</small>
-            <strong>App Store</strong>
+            <small>Simulasi di</small>
+            <strong>Prototype</strong>
           </div>
         </a>
         <a href="#" class="app-btn">
           <span>🤖</span>
           <div class="app-btn-text">
-            <small>Tersedia di</small>
-            <strong>Google Play</strong>
+            <small>Silahkan isi</small>
+            <strong>Google Form</strong>
           </div>
         </a>
       </div>
@@ -527,7 +540,7 @@ footer{background:var(--text);color:rgba(255,255,255,0.6);padding:60px 8% 32px;m
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo">
-        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
+        <div class="logo-icon"><img src="logo.png" alt="SuperRepair Logo"></div>
         SuperRepair
       </div>
       <p>Platform jasa perbaikan rumah terpercaya yang menghubungkan Anda dengan teknisi profesional di seluruh Indonesia.</p>
@@ -564,7 +577,7 @@ footer{background:var(--text);color:rgba(255,255,255,0.6);padding:60px 8% 32px;m
   </div>
   <div class="footer-bottom">
     <span>© 2026 SuperRepair. Hak cipta dilindungi.</span>
-    <span>Dibuat dengan ❤️ untuk Indonesia</span>
+    <span>Dibuat oleh Tim SuperRepair sebagai tugas mata kuliah Technopreneurship</span>
   </div>
 </footer>
 
